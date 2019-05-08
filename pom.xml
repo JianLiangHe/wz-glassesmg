@@ -17,6 +17,9 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<swagger2.version>2.4.0</swagger2.version>
+		<slf4j.version>1.7.25</slf4j.version>
+		<log4j.version>1.2.17</log4j.version>
 	</properties>
 
 	<dependencies>
@@ -26,6 +29,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
@@ -34,6 +42,39 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<!-- 热部署 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-devtools</artifactId>
+		    <optional>true</optional>
+		</dependency>
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>5.1.37</version>
+		</dependency>
+		<dependency>  
+            <groupId>org.mybatis.spring.boot</groupId>  
+            <artifactId>mybatis-spring-boot-starter</artifactId>  
+            <version>1.3.0</version>  
+    	</dependency>
+    	<!-- 格式化对象，方便输出日志 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.32</version>
+		</dependency>
+		<!-- 引入swagger2的api接口管理工具 -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger2.version}</version>
 		</dependency>
 	</dependencies>
 
