@@ -1,1 +1,58 @@
+server:
+  port: 9802
+  servlet:
+    context-path: /wz-glassesmg
 
+spring:
+  server:
+    MaxFileSize: 50MB
+    MaxRequestSize: 50MB
+  servlet:
+    # 上传文件
+    multipart:
+      # 文件最大size
+      max-file-size: 50MB
+  http:
+    multipart:
+      maxFileSize: 50MB
+      maxRequestSize: 50MB
+  datasource:
+    url: jdbc:mysql://192.168.18.129:3306/wz-glasses?characterEncoding=utf-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    # 初始化连接数
+    initialSize: 1
+    # 最小连接数
+    minidle: 1
+    # 最大连接数
+    maxActive: 2
+    # 最大等待时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+  redis:
+  # 内
+    host: 192.168.18.129
+    port: 6379
+    #password: 
+    # 连接池
+    pool:
+      # 最大连接数(使用负值表示没有限制)
+      max-active: 5
+      # 最大空闲连接
+      max-idle: 5
+      # 最大阻塞等待时间(使用负值表示没有限制)
+      max-wait: -1
+      # 最小空闲连接
+      min-idle: 1
+    # 默认使用库号
+    database: 0
+    # 连接超时时间(毫秒)
+    timeout: 90000
+
+mybatis:
+  type-aliases-package: com.wz.pojo
+  mapperLocations: classpath:com/wz/mapper/*.xml

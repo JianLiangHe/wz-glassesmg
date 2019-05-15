@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wz.dao.CategoryMapper">
+	<resultMap id="BaseResultMap" type="com.wz.pojo.Category">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="order_no" jdbcType="INTEGER" property="orderNo" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="gmt_create" jdbcType="TIMESTAMP"
+			property="gmtCreate" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name, order_no, status, gmt_create
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from a_category
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from a_category
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.wz.pojo.Category">
+		insert into a_category (id, name, order_no,
+		status, gmt_create)
+		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{orderNo,jdbcType=INTEGER},
+		#{status,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.wz.pojo.Category">
+		insert into a_category
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="orderNo != null">
+				order_no,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNo != null">
+				#{orderNo,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="gmtCreate != null">
+				#{gmtCreate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.wz.pojo.Category">
+		update a_category
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNo != null">
+				order_no = #{orderNo,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.wz.pojo.Category">
+		update a_category
+		set name = #{name,jdbcType=VARCHAR},
+		order_no = #{orderNo,jdbcType=INTEGER},
+		status = #{status,jdbcType=INTEGER},
+		gmt_create = #{gmtCreate,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- 查询所有类目 -->
+	<select id="findAll" resultType="java.util.Map">
+		SELECT
+			id,
+			name
+		FROM a_category
+		WHERE status = 1
+		ORDER BY order_no ASC
+	</select>
+</mapper>
