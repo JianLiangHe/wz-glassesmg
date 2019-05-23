@@ -95,16 +95,15 @@ public class Order {
     private Integer payStatus;
     
     //一个订单对应多个商品
-    private List <Product> ProductList;
-    
+    private List <Product> productList;
     
 
-    public List<Product> getProductList() {
-		return ProductList;
+	public List<Product> getProductList() {
+		return productList;
 	}
 
 	public void setProductList(List<Product> productList) {
-		ProductList = productList;
+		this.productList = productList;
 	}
 
 	public Long getId() {

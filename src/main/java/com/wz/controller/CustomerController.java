@@ -105,14 +105,11 @@ public class CustomerController {
 	}
 	
 	@ApiOperation(value = "查询用户购买的商品")
-	@RequestMapping(value = "registApprove", method = RequestMethod.POST)
-	public RtnResult registApprove(
-			@ModelAttribute Page page,
-			@ApiParam(value = "用户id", required = true) @RequestParam(value = "id", required = true) Integer id
+	@RequestMapping(value = "findProduct", method = RequestMethod.POST)
+	public RtnResult findProduct(
 			
 			) {
-		return null;
-		//return customerService.registApprove(id, approveStatus);
+		return customerService.getProductList();
 	}
 
 }

@@ -22,11 +22,21 @@
   
  <!--  查找用户购买商品map -->
   <resultMap type="com.wz.pojo.Customer" id="ProductListMap" extends="BaseResultMap">
-	<collection property="orderList" column="id"
-				ofType="com.wz.pojo.Order">
+  
+        <!--   订单列表 -->
+	<collection property="orderList" column="id" ofType="com.wz.pojo.Order">
 				<!-- id:唯一标识 property：要将订单明细的唯一标识映射到com.mybatis.entity.OrderDetail的那个属性 -->
 				<id column="OrderId" property="id" />
-				<result column="permission" property="permission" />
+				<result column="product_id" property="productId" />
+				
+				<!-- 购买的商品列表 -->
+				<collection property="productList" column="id" ofType="com.wz.pojo.Product">
+				<!-- id:唯一标识 property：要将订单明细的唯一标识映射到com.mybatis.entity.OrderDetail的那个属性 -->
+				<id column="product_id" property="id" />
+				<result column="productName" property="name" />
+				<result column="pic_url" property="picUrl" />
+			</collection>
+			
 			</collection>
   
   </resultMap>
@@ -42,43 +52,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   
-  <!--   查找用户(条件) -->
-   <select id="find" parameterType="com.wz.dto.FindCustomerDto" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from a_customer
-   <where>
-   
-   <if test ="id!=null">
-    id = #{id}
-   </if>
-   
-   <if test = "status!=null">
-   AND status = #{status}
-   </if>
-   
-   <if test = "approveStatus!=null">
-   AND approve_status = #{approveStatus}
-   </if>
-   
-    <if test = "mobile!=null">
-   AND mobile = #{mobile}
-   </if>
-   
-    <if test = "city!=null">
-   AND city = #{city}
-   </if>
-   
-    <if test = "isDelete!=null">
-   AND is_delete = #{isDelete}
-   </if>
-   
-   <if test = "shopName!=null">
-   AND shop_name  LIKE CONCAT(CONCAT('%', #{shopName}), '%')
-   </if>
-   </where>
-  ORDER BY gmt_create DESC LIMIT #{page.start}, #{page.pageItemCount}  
-  </select>
+ 
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from a_customer
@@ -280,6 +254,46 @@
     AND is_delete = 0
   </select>
   
+  
+   <!--   查找用户(条件) -->
+   <select id="find" parameterType="com.wz.dto.FindCustomerDto" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from a_customer
+   <where>
+   
+   <if test ="id!=null">
+    id = #{id}
+   </if>
+   
+   <if test = "status!=null">
+   AND status = #{status}
+   </if>
+   
+   <if test = "approveStatus!=null">
+   AND approve_status = #{approveStatus}
+   </if>
+   
+    <if test = "mobile!=null">
+   AND mobile = #{mobile}
+   </if>
+   
+    <if test = "city!=null">
+   AND city = #{city}
+   </if>
+   
+    <if test = "isDelete!=null">
+   AND is_delete = #{isDelete}
+   </if>
+   
+   <if test = "shopName!=null">
+   AND shop_name  LIKE CONCAT(CONCAT('%', #{shopName}), '%')
+   </if>
+   </where>
+  ORDER BY gmt_create DESC LIMIT #{page.start}, #{page.pageItemCount}  
+  </select>
+  
+   <!-- 更新用户状态 -->
   <update id ="updateStatus" >
    update a_customer 
    <set>
@@ -292,6 +306,7 @@
      </set>
   </update>
   
+  <!-- 用户注册审批 -->
   <update id ="registApprove" >
    update a_customer
    <set>
@@ -304,5 +319,13 @@
      </set>
   </update>
    
+   <!-- 查询用户所购买的商品 -->
+   <select id="getProduceList" resultMap="ProductListMap">
+   
+   SELECT ac.*,ao.*,ap.name as 'productName',ap.pic_url as 'picUrl'
+   FROM a_customer ac, a_order ao, a_product ap
+   WHERE ac.id = ao.customer_id 
+   AND ao.product_id = ap.id;
+   </select>
    
 </mapper>

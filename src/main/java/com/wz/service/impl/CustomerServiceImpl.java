@@ -86,4 +86,11 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 
 	}
+
+	@Override
+	public RtnResult getProductList() {
+	
+	List<Customer>	produceList = customerMapper.getProduceList();
+	return new RtnResult(WebUtils.SUCCESS_RESULT, WebUtils.SUCCESS_STATUS, WebUtils.SUCCESS_MESSAGE, produceList);
+	}
 }

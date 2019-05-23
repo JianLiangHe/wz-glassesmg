@@ -16,4 +16,6 @@ public interface CustomerService {
 	RtnResult regist(Customer customer);
 	
 	RtnResult registApprove(Integer id, Integer approveStatus);
+	
+	RtnResult getProductList();
 }
