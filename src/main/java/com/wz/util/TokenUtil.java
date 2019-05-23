@@ -16,9 +16,8 @@ public class TokenUtil {
 	public static <T> String encryptToken(T obj) throws Exception {
 		String token = null;
 		String objJsonStr = JSON.toJSONString(obj);
-		System.out.println("json str: " + objJsonStr);
 		byte[] cipher = RSAEncrypt.encrypt(objJsonStr.getBytes());
-		token = new BASE64Encoder().encodeBuffer(cipher);
+		token = new BASE64Encoder().encodeBuffer(cipher).replaceAll("[\\s*\t\n\r]", "");
 		return token;
 	}
 	
@@ -36,25 +35,28 @@ public class TokenUtil {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		Customer customer = new Customer();
-		customer.setAddress("hhh");
-		customer.setId(1);
-		customer.setMobile("13750098002");
+//		Customer customer = new Customer();
+//		customer.setAddress("hhh");
+//		customer.setId(1);
+//		customer.setMobile("13750098002");
+//		
+//		Map<String, Object> data =new HashMap<String, Object>();
+//		data.put("customer", customer);
+//		data.put("time", 123456);
+//		
+//		String token = encryptToken(data);
+//		
+//		Map<String, Object> map = decryptToken(token);
+//		
+//		Set<String> set = map.keySet();
+//		Iterator<String> it = set.iterator();
+//		while (it.hasNext()) {
+//			String obj = it.next();
+//			System.out.println("k:" + obj + ", v:" + map.get(obj));
+//		}
 		
-		Map<String, Object> data =new HashMap<String, Object>();
-		data.put("customer", customer);
-		data.put("time", 123456);
-		
-		String token = encryptToken(data);
-		
-		Map<String, Object> map = decryptToken(token);
-		
-		Set<String> set = map.keySet();
-		Iterator<String> it = set.iterator();
-		while (it.hasNext()) {
-			String obj = it.next();
-			System.out.println("k:" + obj + ", v:" + map.get(obj));
-		}
+		String string = MD5Util.string2MD5("wz888888");
+		System.out.println(string);
 	}
 	
 }

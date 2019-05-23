@@ -12,10 +12,10 @@ spring:
     multipart:
       # 文件最大size
       max-file-size: 50MB
-  http:
-    multipart:
-      maxFileSize: 50MB
-      maxRequestSize: 50MB
+#  http:
+#    multipart:
+#      maxFileSize: 50MB
+#      maxRequestSize: 50MB
   datasource:
     url: jdbc:mysql://192.168.18.129:3306/wz-glasses?characterEncoding=utf-8
     username: root
@@ -39,20 +39,28 @@ spring:
     port: 6379
     #password: 
     # 连接池
-    pool:
+#    pool:
       # 最大连接数(使用负值表示没有限制)
-      max-active: 5
+#      max-active: 5
       # 最大空闲连接
-      max-idle: 5
+#      max-idle: 5
       # 最大阻塞等待时间(使用负值表示没有限制)
-      max-wait: -1
+#      max-wait: -1
       # 最小空闲连接
-      min-idle: 1
+#      min-idle: 1
     # 默认使用库号
     database: 0
     # 连接超时时间(毫秒)
     timeout: 90000
 
+
+debug:
+  true  
+  
+logging:
+  level:
+    com.wz.dao.*: debug 
+  
 mybatis:
   type-aliases-package: com.wz.pojo
   mapperLocations: classpath:com/wz/mapper/*.xml

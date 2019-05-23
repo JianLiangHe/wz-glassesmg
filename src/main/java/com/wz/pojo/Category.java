@@ -1,6 +1,8 @@
 package com.wz.pojo;
 
+
 import java.util.Date;
+import java.util.List;
 
 public class Category {
     private Integer id;
@@ -12,8 +14,9 @@ public class Category {
     private Integer status;
 
     private Date gmtCreate;
+    
 
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 

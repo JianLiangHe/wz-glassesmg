@@ -19,6 +19,18 @@
     <result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate" />
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
   </resultMap>
+  
+ <!--  查找用户购买商品map -->
+  <resultMap type="com.wz.pojo.Customer" id="ProductListMap" extends="BaseResultMap">
+	<collection property="orderList" column="id"
+				ofType="com.wz.pojo.Order">
+				<!-- id:唯一标识 property：要将订单明细的唯一标识映射到com.mybatis.entity.OrderDetail的那个属性 -->
+				<id column="OrderId" property="id" />
+				<result column="permission" property="permission" />
+			</collection>
+  
+  </resultMap>
+  
   <sql id="Base_Column_List">
     id, shop_name, province, city, area, address, linkman, password, idcard_url, business_url, 
     mobile, status, approve_status, gmt_create, gmt_update, is_delete
@@ -29,6 +41,45 @@
     from a_customer
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <!--   查找用户(条件) -->
+   <select id="find" parameterType="com.wz.dto.FindCustomerDto" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from a_customer
+   <where>
+   
+   <if test ="id!=null">
+    id = #{id}
+   </if>
+   
+   <if test = "status!=null">
+   AND status = #{status}
+   </if>
+   
+   <if test = "approveStatus!=null">
+   AND approve_status = #{approveStatus}
+   </if>
+   
+    <if test = "mobile!=null">
+   AND mobile = #{mobile}
+   </if>
+   
+    <if test = "city!=null">
+   AND city = #{city}
+   </if>
+   
+    <if test = "isDelete!=null">
+   AND is_delete = #{isDelete}
+   </if>
+   
+   <if test = "shopName!=null">
+   AND shop_name  LIKE CONCAT(CONCAT('%', #{shopName}), '%')
+   </if>
+   </where>
+  ORDER BY gmt_create DESC LIMIT #{page.start}, #{page.pageItemCount}  
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from a_customer
     where id = #{id,jdbcType=INTEGER}
@@ -228,4 +279,30 @@
     WHERE mobile = #{mobile}
     AND is_delete = 0
   </select>
+  
+  <update id ="updateStatus" >
+   update a_customer 
+   <set>
+   <if test = "status!=null">
+   status = #{status}
+   </if>
+   <where>
+   id = #{id}
+   </where>
+     </set>
+  </update>
+  
+  <update id ="registApprove" >
+   update a_customer
+   <set>
+   <if test = "approveStatus!=null">
+   approve_status = #{approveStatus}
+   </if>
+   <where>
+   id = #{id}
+   </where>
+     </set>
+  </update>
+   
+   
 </mapper>

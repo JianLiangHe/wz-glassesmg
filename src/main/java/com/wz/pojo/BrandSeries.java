@@ -13,6 +13,8 @@ public class BrandSeries {
 
     private Integer brandId;
 
+    private String screenJson;
+
     public Integer getId() {
         return id;
     }
@@ -51,5 +53,13 @@ public class BrandSeries {
 
     public void setBrandId(Integer brandId) {
         this.brandId = brandId;
+    }
+
+    public String getScreenJson() {
+        return screenJson;
+    }
+
+    public void setScreenJson(String screenJson) {
+        this.screenJson = screenJson;
     }
 }

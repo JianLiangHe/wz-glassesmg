@@ -1,6 +1,7 @@
 package com.wz.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Customer {
     private Integer id;
@@ -34,8 +35,21 @@ public class Customer {
     private Date gmtUpdate;
 
     private Integer isDelete;
+    
+    //一个用户对应多个订单
+    private List<Order> orderList;
+    
+    
 
-    public Integer getId() {
+    public List<Order> getOrderList() {
+		return orderList;
+	}
+
+	public void setOrderList(List<Order> orderList) {
+		this.orderList = orderList;
+	}
+
+	public Integer getId() {
         return id;
     }
 

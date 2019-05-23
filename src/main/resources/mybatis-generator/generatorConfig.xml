@@ -2,7 +2,7 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
 	<!-- 数据库驱动包位置 -->
-	<classPathEntry location="C:\maven_repository\mysql\mysql-connector-java\5.1.37\mysql-connector-java-5.1.37.jar" />
+	<classPathEntry location="D:\java\mysql-connector-java-5.1.38.jar" />
 	<context id="context1">
 		<commentGenerator>
 			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
@@ -26,7 +26,7 @@
 		<javaClientGenerator targetPackage="com.wz.dao"
 			targetProject="wz-glasses" type="XMLMAPPER"/>
 		<!-- 要生成的那些表(更改tableName 和domainObjectName 就可以了) -->
-		<table schema="ssm1" tableName="a_brand_series" domainObjectName="BrandSeries" mapperName="BrandSeriesMapper" 
+		<table schema="ssm1" tableName="a_order" domainObjectName="Order" mapperName="OrderMapper"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">

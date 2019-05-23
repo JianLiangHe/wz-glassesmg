@@ -115,6 +115,13 @@
 			<artifactId>bcprov-jdk15on</artifactId>
 			<version>1.56</version>
 		</dependency>
+		
+		   <!-- lombol -->
+        <dependency>
+        	<groupId>org.projectlombok</groupId>
+        	<artifactId>lombok</artifactId>
+        </dependency>
+
 	</dependencies>
 
 	<build>
@@ -123,6 +130,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
 		</plugins>
 	</build>
 

@@ -1,6 +1,7 @@
 package com.wz.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Brand {
     private Integer id;
@@ -14,8 +15,9 @@ public class Brand {
     private Date gmtCreate;
 
     private Integer brandTypeId;
+    
 
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 
