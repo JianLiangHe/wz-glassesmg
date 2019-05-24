@@ -1,269 +1,287 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wz.dao.ProductMapper">
-  <resultMap id="BaseResultMap" type="com.wz.pojo.Product">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
-    <result column="original_price" jdbcType="INTEGER" property="originalPrice" />
-    <result column="current_price" jdbcType="INTEGER" property="currentPrice" />
-    <result column="unit" jdbcType="VARCHAR" property="unit" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate" />
-    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="brand_series_id" jdbcType="INTEGER" property="brandSeriesId" />
-    <result column="specification_json" jdbcType="VARCHAR" property="specificationJson" />
-    <result column="guid" jdbcType="VARCHAR" property="guid" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.wz.pojo.Product">
-    <result column="info" jdbcType="LONGVARCHAR" property="info" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, name, pic_url, original_price, current_price, unit, status, gmt_create, gmt_update, 
-    is_delete, user_id, brand_series_id, specification_json, guid
-  </sql>
-  <sql id="Blob_Column_List">
-    info
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from a_product
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from a_product
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.wz.pojo.Product">
-    insert into a_product (id, name, pic_url, 
-      original_price, current_price, unit, 
-      status, gmt_create, gmt_update, 
-      is_delete, user_id, brand_series_id, 
-      specification_json, guid, info
-      )
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, 
-      #{originalPrice,jdbcType=INTEGER}, #{currentPrice,jdbcType=INTEGER}, #{unit,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtUpdate,jdbcType=TIMESTAMP}, 
-      #{isDelete,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{brandSeriesId,jdbcType=INTEGER}, 
-      #{specificationJson,jdbcType=VARCHAR}, #{guid,jdbcType=VARCHAR}, #{info,jdbcType=LONGVARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.wz.pojo.Product">
-    insert into a_product
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="picUrl != null">
-        pic_url,
-      </if>
-      <if test="originalPrice != null">
-        original_price,
-      </if>
-      <if test="currentPrice != null">
-        current_price,
-      </if>
-      <if test="unit != null">
-        unit,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create,
-      </if>
-      <if test="gmtUpdate != null">
-        gmt_update,
-      </if>
-      <if test="isDelete != null">
-        is_delete,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="brandSeriesId != null">
-        brand_series_id,
-      </if>
-      <if test="specificationJson != null">
-        specification_json,
-      </if>
-      <if test="guid != null">
-        guid,
-      </if>
-      <if test="info != null">
-        info,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="picUrl != null">
-        #{picUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="originalPrice != null">
-        #{originalPrice,jdbcType=INTEGER},
-      </if>
-      <if test="currentPrice != null">
-        #{currentPrice,jdbcType=INTEGER},
-      </if>
-      <if test="unit != null">
-        #{unit,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="gmtCreate != null">
-        #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtUpdate != null">
-        #{gmtUpdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDelete != null">
-        #{isDelete,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="brandSeriesId != null">
-        #{brandSeriesId,jdbcType=INTEGER},
-      </if>
-      <if test="specificationJson != null">
-        #{specificationJson,jdbcType=VARCHAR},
-      </if>
-      <if test="guid != null">
-        #{guid,jdbcType=VARCHAR},
-      </if>
-      <if test="info != null">
-        #{info,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wz.pojo.Product">
-    update a_product
-    <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="picUrl != null">
-        pic_url = #{picUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="originalPrice != null">
-        original_price = #{originalPrice,jdbcType=INTEGER},
-      </if>
-      <if test="currentPrice != null">
-        current_price = #{currentPrice,jdbcType=INTEGER},
-      </if>
-      <if test="unit != null">
-        unit = #{unit,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtUpdate != null">
-        gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDelete != null">
-        is_delete = #{isDelete,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="brandSeriesId != null">
-        brand_series_id = #{brandSeriesId,jdbcType=INTEGER},
-      </if>
-      <if test="specificationJson != null">
-        specification_json = #{specificationJson,jdbcType=VARCHAR},
-      </if>
-      <if test="guid != null">
-        guid = #{guid,jdbcType=VARCHAR},
-      </if>
-      <if test="info != null">
-        info = #{info,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wz.pojo.Product">
-    update a_product
-    set name = #{name,jdbcType=VARCHAR},
-      pic_url = #{picUrl,jdbcType=VARCHAR},
-      original_price = #{originalPrice,jdbcType=INTEGER},
-      current_price = #{currentPrice,jdbcType=INTEGER},
-      unit = #{unit,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
-      is_delete = #{isDelete,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
-      brand_series_id = #{brandSeriesId,jdbcType=INTEGER},
-      specification_json = #{specificationJson,jdbcType=VARCHAR},
-      guid = #{guid,jdbcType=VARCHAR},
-      info = #{info,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.wz.pojo.Product">
-    update a_product
-    set name = #{name,jdbcType=VARCHAR},
-      pic_url = #{picUrl,jdbcType=VARCHAR},
-      original_price = #{originalPrice,jdbcType=INTEGER},
-      current_price = #{currentPrice,jdbcType=INTEGER},
-      unit = #{unit,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
-      is_delete = #{isDelete,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
-      brand_series_id = #{brandSeriesId,jdbcType=INTEGER},
-      specification_json = #{specificationJson,jdbcType=VARCHAR},
-      guid = #{guid,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  
-  <select id="find"  parameterType="com.wz.dto.FindProductDto" resultType="com.wz.pojo.ProductDetail">
-  SELECT p.*, abs.name AS 'brandSeries', ab.name AS 'brand', aby.name AS 'brandType', ac.name AS 'category'
-  FROM a_product p 
-  LEFT JOIN a_brand_series abs  ON p.brand_series_id = abs.id 
-  LEFT JOIN a_brand ab ON  abs.brand_id = ab.id  
-  LEFT JOIN a_brand_type aby ON ab.brand_type_id = aby.id 
-  LEFT JOIN a_category ac ON aby.category_id =ac.id 
-  <where>
-  <if test="name!=null">
-     p.name  LIKE CONCAT(CONCAT('%', #{name}), '%')
-  </if>
-  
-  <if test="status!=null">
-  AND p.status = #{status}
-  </if>
-  
-  <if test="brandSeriesId!=null">
-  AND p.brand_series_id = #{brandSeriesId}
-  </if>
-  
-  <if test="isDelete!=null">
-  AND p.is_delete = #{isDelete}
-  </if>
-  </where>
-  LIMIT #{page.start},#{page.pageItemCount}
-  
-  </select>
-  
-  <update id="updateIsDelete" >
-  
-  update a_product set is_delete = #{isDelete} where id = #{id}
-  </update>
+	<resultMap id="BaseResultMap" type="com.wz.pojo.Product">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
+		<result column="original_price" jdbcType="INTEGER"
+			property="originalPrice" />
+		<result column="current_price" jdbcType="INTEGER"
+			property="currentPrice" />
+		<result column="unit" jdbcType="VARCHAR" property="unit" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="gmt_create" jdbcType="TIMESTAMP"
+			property="gmtCreate" />
+		<result column="gmt_update" jdbcType="TIMESTAMP"
+			property="gmtUpdate" />
+		<result column="is_delete" jdbcType="INTEGER"
+			property="isDelete" />
+		<result column="user_id" jdbcType="INTEGER" property="userId" />
+		<result column="brand_series_id" jdbcType="INTEGER"
+			property="brandSeriesId" />
+		<result column="specification_json" jdbcType="VARCHAR"
+			property="specificationJson" />
+		<result column="guid" jdbcType="VARCHAR" property="guid" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.wz.pojo.Product">
+		<result column="info" jdbcType="LONGVARCHAR" property="info" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name, pic_url, original_price, current_price, unit, status,
+		gmt_create, gmt_update,
+		is_delete, user_id, brand_series_id, specification_json, guid
+	</sql>
+	<sql id="Blob_Column_List">
+		info
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from a_product
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from a_product
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.wz.pojo.Product">
+		insert into a_product (id, name, pic_url,
+		original_price, current_price, unit,
+		status, gmt_create, gmt_update,
+		is_delete, user_id, brand_series_id,
+		specification_json, guid, info
+		)
+		values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
+		#{picUrl,jdbcType=VARCHAR},
+		#{originalPrice,jdbcType=INTEGER}, #{currentPrice,jdbcType=INTEGER}, #{unit,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP},
+		#{gmtUpdate,jdbcType=TIMESTAMP},
+		#{isDelete,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{brandSeriesId,jdbcType=INTEGER},
+		#{specificationJson,jdbcType=VARCHAR}, #{guid,jdbcType=VARCHAR},
+		#{info,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.wz.pojo.Product">
+		insert into a_product
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="picUrl != null">
+				pic_url,
+			</if>
+			<if test="originalPrice != null">
+				original_price,
+			</if>
+			<if test="currentPrice != null">
+				current_price,
+			</if>
+			<if test="unit != null">
+				unit,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create,
+			</if>
+			<if test="gmtUpdate != null">
+				gmt_update,
+			</if>
+			<if test="isDelete != null">
+				is_delete,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="brandSeriesId != null">
+				brand_series_id,
+			</if>
+			<if test="specificationJson != null">
+				specification_json,
+			</if>
+			<if test="guid != null">
+				guid,
+			</if>
+			<if test="info != null">
+				info,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="picUrl != null">
+				#{picUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="originalPrice != null">
+				#{originalPrice,jdbcType=INTEGER},
+			</if>
+			<if test="currentPrice != null">
+				#{currentPrice,jdbcType=INTEGER},
+			</if>
+			<if test="unit != null">
+				#{unit,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="gmtCreate != null">
+				#{gmtCreate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gmtUpdate != null">
+				#{gmtUpdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isDelete != null">
+				#{isDelete,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="brandSeriesId != null">
+				#{brandSeriesId,jdbcType=INTEGER},
+			</if>
+			<if test="specificationJson != null">
+				#{specificationJson,jdbcType=VARCHAR},
+			</if>
+			<if test="guid != null">
+				#{guid,jdbcType=VARCHAR},
+			</if>
+			<if test="info != null">
+				#{info,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.wz.pojo.Product">
+		update a_product
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="picUrl != null">
+				pic_url = #{picUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="originalPrice != null">
+				original_price = #{originalPrice,jdbcType=INTEGER},
+			</if>
+			<if test="currentPrice != null">
+				current_price = #{currentPrice,jdbcType=INTEGER},
+			</if>
+			<if test="unit != null">
+				unit = #{unit,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gmtUpdate != null">
+				gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isDelete != null">
+				is_delete = #{isDelete,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="brandSeriesId != null">
+				brand_series_id = #{brandSeriesId,jdbcType=INTEGER},
+			</if>
+			<if test="specificationJson != null">
+				specification_json = #{specificationJson,jdbcType=VARCHAR},
+			</if>
+			<if test="guid != null">
+				guid = #{guid,jdbcType=VARCHAR},
+			</if>
+			<if test="info != null">
+				info = #{info,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs"
+		parameterType="com.wz.pojo.Product">
+		update a_product
+		set name = #{name,jdbcType=VARCHAR},
+		pic_url = #{picUrl,jdbcType=VARCHAR},
+		original_price = #{originalPrice,jdbcType=INTEGER},
+		current_price = #{currentPrice,jdbcType=INTEGER},
+		unit = #{unit,jdbcType=VARCHAR},
+		status = #{status,jdbcType=INTEGER},
+		gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+		gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
+		is_delete = #{isDelete,jdbcType=INTEGER},
+		user_id = #{userId,jdbcType=INTEGER},
+		brand_series_id = #{brandSeriesId,jdbcType=INTEGER},
+		specification_json = #{specificationJson,jdbcType=VARCHAR},
+		guid = #{guid,jdbcType=VARCHAR},
+		info = #{info,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.wz.pojo.Product">
+		update a_product
+		set name = #{name,jdbcType=VARCHAR},
+		pic_url = #{picUrl,jdbcType=VARCHAR},
+		original_price = #{originalPrice,jdbcType=INTEGER},
+		current_price = #{currentPrice,jdbcType=INTEGER},
+		unit = #{unit,jdbcType=VARCHAR},
+		status = #{status,jdbcType=INTEGER},
+		gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+		gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
+		is_delete = #{isDelete,jdbcType=INTEGER},
+		user_id = #{userId,jdbcType=INTEGER},
+		brand_series_id = #{brandSeriesId,jdbcType=INTEGER},
+		specification_json = #{specificationJson,jdbcType=VARCHAR},
+		guid = #{guid,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="find" parameterType="com.wz.dto.FindProductDto"
+		resultType="com.wz.pojo.ProductDetail">
+		SELECT p.*, abs.name AS 'brandSeries', ab.name AS 'brand', aby.name AS
+		'brandType', ac.name AS 'category'
+		FROM a_product p
+		LEFT JOIN a_brand_series abs ON p.brand_series_id = abs.id
+		LEFT JOIN a_brand ab ON abs.brand_id = ab.id
+		LEFT JOIN a_brand_type aby ON ab.brand_type_id = aby.id
+		LEFT JOIN a_category ac ON aby.category_id =ac.id
+		<where>
+			<if test="name!=null">
+				p.name LIKE CONCAT(CONCAT('%', #{name}), '%')
+			</if>
+
+			<if test="status!=null">
+				AND p.status = #{status}
+			</if>
+
+			<if test="brandSeriesId!=null">
+				AND p.brand_series_id = #{brandSeriesId}
+			</if>
+
+			<if test="isDelete!=null">
+				AND p.is_delete = #{isDelete}
+			</if>
+		</where>
+		LIMIT #{page.start},#{page.pageItemCount}
+
+	</select>
+
+	<update id="updateIsDelete">
+
+		update a_product set is_delete = #{isDelete} where id = #{id}
+	</update>
 </mapper>

@@ -1,566 +1,610 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wz.dao.OrderMapper">
-  <resultMap id="BaseResultMap" type="com.wz.pojo.Order">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="guid" jdbcType="VARCHAR" property="guid" />
-    <result column="body" jdbcType="VARCHAR" property="body" />
-    <result column="body_detail" jdbcType="VARCHAR" property="bodyDetail" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="customer_id" jdbcType="BIGINT" property="customerId" />
-    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
-    <result column="fee_type" jdbcType="VARCHAR" property="feeType" />
-    <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime" />
-    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
-    <result column="object_id" jdbcType="BIGINT" property="objectId" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="ship_address" jdbcType="VARCHAR" property="shipAddress" />
-    <result column="source_type" jdbcType="INTEGER" property="sourceType" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="target_address" jdbcType="VARCHAR" property="targetAddress" />
-    <result column="total_free" jdbcType="INTEGER" property="totalFree" />
-    <result column="trade_id" jdbcType="VARCHAR" property="tradeId" />
-    <result column="transaction_id" jdbcType="VARCHAR" property="transactionId" />
-    <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="appid" jdbcType="VARCHAR" property="appid" />
-    <result column="detail" jdbcType="VARCHAR" property="detail" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate" />
-    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
-    <result column="mch_id" jdbcType="VARCHAR" property="mchId" />
-    <result column="nonce_str" jdbcType="VARCHAR" property="nonceStr" />
-    <result column="notify_url" jdbcType="VARCHAR" property="notifyUrl" />
-    <result column="openid" jdbcType="VARCHAR" property="openid" />
-    <result column="order_str_id" jdbcType="VARCHAR" property="orderStrId" />
-    <result column="out_trade_no" jdbcType="VARCHAR" property="outTradeNo" />
-    <result column="pay_type" jdbcType="INTEGER" property="payType" />
-    <result column="product_id" jdbcType="VARCHAR" property="productId" />
-    <result column="sign" jdbcType="VARCHAR" property="sign" />
-    <result column="sign_type" jdbcType="VARCHAR" property="signType" />
-    <result column="spbill_create_ip" jdbcType="VARCHAR" property="spbillCreateIp" />
-    <result column="time_expire" jdbcType="VARCHAR" property="timeExpire" />
-    <result column="time_start" jdbcType="VARCHAR" property="timeStart" />
-    <result column="trade_type" jdbcType="VARCHAR" property="tradeType" />
-    <result column="content_json" jdbcType="VARCHAR" property="contentJson" />
-    <result column="kd_type" jdbcType="VARCHAR" property="kdType" />
-    <result column="kd_number" jdbcType="VARCHAR" property="kdNumber" />
-    <result column="kd_pay_type" jdbcType="INTEGER" property="kdPayType" />
-    <result column="kd_price" jdbcType="INTEGER" property="kdPrice" />
-    <result column="pay_status" jdbcType="INTEGER" property="payStatus" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, guid, body, body_detail, create_time, customer_id, customer_name, fee_type, finish_time, 
-    mobile, object_id, remark, ship_address, source_type, status, target_address, total_free, 
-    trade_id, transaction_id, type, appid, detail, gmt_create, gmt_update, is_delete, 
-    mch_id, nonce_str, notify_url, openid, order_str_id, out_trade_no, pay_type, product_id, 
-    sign, sign_type, spbill_create_ip, time_expire, time_start, trade_type, content_json, 
-    kd_type, kd_number, kd_pay_type, kd_price, pay_status
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from a_order
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from a_order
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.wz.pojo.Order">
-    insert into a_order (id, guid, body, 
-      body_detail, create_time, customer_id, 
-      customer_name, fee_type, finish_time, 
-      mobile, object_id, remark, 
-      ship_address, source_type, status, 
-      target_address, total_free, trade_id, 
-      transaction_id, type, appid, 
-      detail, gmt_create, gmt_update, 
-      is_delete, mch_id, nonce_str, 
-      notify_url, openid, order_str_id, 
-      out_trade_no, pay_type, product_id, 
-      sign, sign_type, spbill_create_ip, 
-      time_expire, time_start, trade_type, 
-      content_json, kd_type, kd_number, 
-      kd_pay_type, kd_price, pay_status
-      )
-    values (#{id,jdbcType=BIGINT}, #{guid,jdbcType=VARCHAR}, #{body,jdbcType=VARCHAR}, 
-      #{bodyDetail,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{customerId,jdbcType=BIGINT}, 
-      #{customerName,jdbcType=VARCHAR}, #{feeType,jdbcType=VARCHAR}, #{finishTime,jdbcType=TIMESTAMP}, 
-      #{mobile,jdbcType=VARCHAR}, #{objectId,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, 
-      #{shipAddress,jdbcType=VARCHAR}, #{sourceType,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
-      #{targetAddress,jdbcType=VARCHAR}, #{totalFree,jdbcType=INTEGER}, #{tradeId,jdbcType=VARCHAR}, 
-      #{transactionId,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{appid,jdbcType=VARCHAR}, 
-      #{detail,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtUpdate,jdbcType=TIMESTAMP}, 
-      #{isDelete,jdbcType=INTEGER}, #{mchId,jdbcType=VARCHAR}, #{nonceStr,jdbcType=VARCHAR}, 
-      #{notifyUrl,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{orderStrId,jdbcType=VARCHAR}, 
-      #{outTradeNo,jdbcType=VARCHAR}, #{payType,jdbcType=INTEGER}, #{productId,jdbcType=VARCHAR}, 
-      #{sign,jdbcType=VARCHAR}, #{signType,jdbcType=VARCHAR}, #{spbillCreateIp,jdbcType=VARCHAR}, 
-      #{timeExpire,jdbcType=VARCHAR}, #{timeStart,jdbcType=VARCHAR}, #{tradeType,jdbcType=VARCHAR}, 
-      #{contentJson,jdbcType=VARCHAR}, #{kdType,jdbcType=VARCHAR}, #{kdNumber,jdbcType=VARCHAR}, 
-      #{kdPayType,jdbcType=INTEGER}, #{kdPrice,jdbcType=INTEGER}, #{payStatus,jdbcType=INTEGER}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.wz.pojo.Order">
-    insert into a_order
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="guid != null">
-        guid,
-      </if>
-      <if test="body != null">
-        body,
-      </if>
-      <if test="bodyDetail != null">
-        body_detail,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="customerId != null">
-        customer_id,
-      </if>
-      <if test="customerName != null">
-        customer_name,
-      </if>
-      <if test="feeType != null">
-        fee_type,
-      </if>
-      <if test="finishTime != null">
-        finish_time,
-      </if>
-      <if test="mobile != null">
-        mobile,
-      </if>
-      <if test="objectId != null">
-        object_id,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="shipAddress != null">
-        ship_address,
-      </if>
-      <if test="sourceType != null">
-        source_type,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="targetAddress != null">
-        target_address,
-      </if>
-      <if test="totalFree != null">
-        total_free,
-      </if>
-      <if test="tradeId != null">
-        trade_id,
-      </if>
-      <if test="transactionId != null">
-        transaction_id,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="appid != null">
-        appid,
-      </if>
-      <if test="detail != null">
-        detail,
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create,
-      </if>
-      <if test="gmtUpdate != null">
-        gmt_update,
-      </if>
-      <if test="isDelete != null">
-        is_delete,
-      </if>
-      <if test="mchId != null">
-        mch_id,
-      </if>
-      <if test="nonceStr != null">
-        nonce_str,
-      </if>
-      <if test="notifyUrl != null">
-        notify_url,
-      </if>
-      <if test="openid != null">
-        openid,
-      </if>
-      <if test="orderStrId != null">
-        order_str_id,
-      </if>
-      <if test="outTradeNo != null">
-        out_trade_no,
-      </if>
-      <if test="payType != null">
-        pay_type,
-      </if>
-      <if test="productId != null">
-        product_id,
-      </if>
-      <if test="sign != null">
-        sign,
-      </if>
-      <if test="signType != null">
-        sign_type,
-      </if>
-      <if test="spbillCreateIp != null">
-        spbill_create_ip,
-      </if>
-      <if test="timeExpire != null">
-        time_expire,
-      </if>
-      <if test="timeStart != null">
-        time_start,
-      </if>
-      <if test="tradeType != null">
-        trade_type,
-      </if>
-      <if test="contentJson != null">
-        content_json,
-      </if>
-      <if test="kdType != null">
-        kd_type,
-      </if>
-      <if test="kdNumber != null">
-        kd_number,
-      </if>
-      <if test="kdPayType != null">
-        kd_pay_type,
-      </if>
-      <if test="kdPrice != null">
-        kd_price,
-      </if>
-      <if test="payStatus != null">
-        pay_status,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="guid != null">
-        #{guid,jdbcType=VARCHAR},
-      </if>
-      <if test="body != null">
-        #{body,jdbcType=VARCHAR},
-      </if>
-      <if test="bodyDetail != null">
-        #{bodyDetail,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="customerId != null">
-        #{customerId,jdbcType=BIGINT},
-      </if>
-      <if test="customerName != null">
-        #{customerName,jdbcType=VARCHAR},
-      </if>
-      <if test="feeType != null">
-        #{feeType,jdbcType=VARCHAR},
-      </if>
-      <if test="finishTime != null">
-        #{finishTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="mobile != null">
-        #{mobile,jdbcType=VARCHAR},
-      </if>
-      <if test="objectId != null">
-        #{objectId,jdbcType=BIGINT},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="shipAddress != null">
-        #{shipAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="sourceType != null">
-        #{sourceType,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="targetAddress != null">
-        #{targetAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="totalFree != null">
-        #{totalFree,jdbcType=INTEGER},
-      </if>
-      <if test="tradeId != null">
-        #{tradeId,jdbcType=VARCHAR},
-      </if>
-      <if test="transactionId != null">
-        #{transactionId,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
-      </if>
-      <if test="appid != null">
-        #{appid,jdbcType=VARCHAR},
-      </if>
-      <if test="detail != null">
-        #{detail,jdbcType=VARCHAR},
-      </if>
-      <if test="gmtCreate != null">
-        #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtUpdate != null">
-        #{gmtUpdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDelete != null">
-        #{isDelete,jdbcType=INTEGER},
-      </if>
-      <if test="mchId != null">
-        #{mchId,jdbcType=VARCHAR},
-      </if>
-      <if test="nonceStr != null">
-        #{nonceStr,jdbcType=VARCHAR},
-      </if>
-      <if test="notifyUrl != null">
-        #{notifyUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="openid != null">
-        #{openid,jdbcType=VARCHAR},
-      </if>
-      <if test="orderStrId != null">
-        #{orderStrId,jdbcType=VARCHAR},
-      </if>
-      <if test="outTradeNo != null">
-        #{outTradeNo,jdbcType=VARCHAR},
-      </if>
-      <if test="payType != null">
-        #{payType,jdbcType=INTEGER},
-      </if>
-      <if test="productId != null">
-        #{productId,jdbcType=VARCHAR},
-      </if>
-      <if test="sign != null">
-        #{sign,jdbcType=VARCHAR},
-      </if>
-      <if test="signType != null">
-        #{signType,jdbcType=VARCHAR},
-      </if>
-      <if test="spbillCreateIp != null">
-        #{spbillCreateIp,jdbcType=VARCHAR},
-      </if>
-      <if test="timeExpire != null">
-        #{timeExpire,jdbcType=VARCHAR},
-      </if>
-      <if test="timeStart != null">
-        #{timeStart,jdbcType=VARCHAR},
-      </if>
-      <if test="tradeType != null">
-        #{tradeType,jdbcType=VARCHAR},
-      </if>
-      <if test="contentJson != null">
-        #{contentJson,jdbcType=VARCHAR},
-      </if>
-      <if test="kdType != null">
-        #{kdType,jdbcType=VARCHAR},
-      </if>
-      <if test="kdNumber != null">
-        #{kdNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="kdPayType != null">
-        #{kdPayType,jdbcType=INTEGER},
-      </if>
-      <if test="kdPrice != null">
-        #{kdPrice,jdbcType=INTEGER},
-      </if>
-      <if test="payStatus != null">
-        #{payStatus,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wz.pojo.Order">
-    update a_order
-    <set>
-      <if test="guid != null">
-        guid = #{guid,jdbcType=VARCHAR},
-      </if>
-      <if test="body != null">
-        body = #{body,jdbcType=VARCHAR},
-      </if>
-      <if test="bodyDetail != null">
-        body_detail = #{bodyDetail,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="customerId != null">
-        customer_id = #{customerId,jdbcType=BIGINT},
-      </if>
-      <if test="customerName != null">
-        customer_name = #{customerName,jdbcType=VARCHAR},
-      </if>
-      <if test="feeType != null">
-        fee_type = #{feeType,jdbcType=VARCHAR},
-      </if>
-      <if test="finishTime != null">
-        finish_time = #{finishTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="mobile != null">
-        mobile = #{mobile,jdbcType=VARCHAR},
-      </if>
-      <if test="objectId != null">
-        object_id = #{objectId,jdbcType=BIGINT},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="shipAddress != null">
-        ship_address = #{shipAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="sourceType != null">
-        source_type = #{sourceType,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="targetAddress != null">
-        target_address = #{targetAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="totalFree != null">
-        total_free = #{totalFree,jdbcType=INTEGER},
-      </if>
-      <if test="tradeId != null">
-        trade_id = #{tradeId,jdbcType=VARCHAR},
-      </if>
-      <if test="transactionId != null">
-        transaction_id = #{transactionId,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="appid != null">
-        appid = #{appid,jdbcType=VARCHAR},
-      </if>
-      <if test="detail != null">
-        detail = #{detail,jdbcType=VARCHAR},
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtUpdate != null">
-        gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDelete != null">
-        is_delete = #{isDelete,jdbcType=INTEGER},
-      </if>
-      <if test="mchId != null">
-        mch_id = #{mchId,jdbcType=VARCHAR},
-      </if>
-      <if test="nonceStr != null">
-        nonce_str = #{nonceStr,jdbcType=VARCHAR},
-      </if>
-      <if test="notifyUrl != null">
-        notify_url = #{notifyUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="openid != null">
-        openid = #{openid,jdbcType=VARCHAR},
-      </if>
-      <if test="orderStrId != null">
-        order_str_id = #{orderStrId,jdbcType=VARCHAR},
-      </if>
-      <if test="outTradeNo != null">
-        out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
-      </if>
-      <if test="payType != null">
-        pay_type = #{payType,jdbcType=INTEGER},
-      </if>
-      <if test="productId != null">
-        product_id = #{productId,jdbcType=VARCHAR},
-      </if>
-      <if test="sign != null">
-        sign = #{sign,jdbcType=VARCHAR},
-      </if>
-      <if test="signType != null">
-        sign_type = #{signType,jdbcType=VARCHAR},
-      </if>
-      <if test="spbillCreateIp != null">
-        spbill_create_ip = #{spbillCreateIp,jdbcType=VARCHAR},
-      </if>
-      <if test="timeExpire != null">
-        time_expire = #{timeExpire,jdbcType=VARCHAR},
-      </if>
-      <if test="timeStart != null">
-        time_start = #{timeStart,jdbcType=VARCHAR},
-      </if>
-      <if test="tradeType != null">
-        trade_type = #{tradeType,jdbcType=VARCHAR},
-      </if>
-      <if test="contentJson != null">
-        content_json = #{contentJson,jdbcType=VARCHAR},
-      </if>
-      <if test="kdType != null">
-        kd_type = #{kdType,jdbcType=VARCHAR},
-      </if>
-      <if test="kdNumber != null">
-        kd_number = #{kdNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="kdPayType != null">
-        kd_pay_type = #{kdPayType,jdbcType=INTEGER},
-      </if>
-      <if test="kdPrice != null">
-        kd_price = #{kdPrice,jdbcType=INTEGER},
-      </if>
-      <if test="payStatus != null">
-        pay_status = #{payStatus,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.wz.pojo.Order">
-    update a_order
-    set guid = #{guid,jdbcType=VARCHAR},
-      body = #{body,jdbcType=VARCHAR},
-      body_detail = #{bodyDetail,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      customer_id = #{customerId,jdbcType=BIGINT},
-      customer_name = #{customerName,jdbcType=VARCHAR},
-      fee_type = #{feeType,jdbcType=VARCHAR},
-      finish_time = #{finishTime,jdbcType=TIMESTAMP},
-      mobile = #{mobile,jdbcType=VARCHAR},
-      object_id = #{objectId,jdbcType=BIGINT},
-      remark = #{remark,jdbcType=VARCHAR},
-      ship_address = #{shipAddress,jdbcType=VARCHAR},
-      source_type = #{sourceType,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER},
-      target_address = #{targetAddress,jdbcType=VARCHAR},
-      total_free = #{totalFree,jdbcType=INTEGER},
-      trade_id = #{tradeId,jdbcType=VARCHAR},
-      transaction_id = #{transactionId,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER},
-      appid = #{appid,jdbcType=VARCHAR},
-      detail = #{detail,jdbcType=VARCHAR},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
-      is_delete = #{isDelete,jdbcType=INTEGER},
-      mch_id = #{mchId,jdbcType=VARCHAR},
-      nonce_str = #{nonceStr,jdbcType=VARCHAR},
-      notify_url = #{notifyUrl,jdbcType=VARCHAR},
-      openid = #{openid,jdbcType=VARCHAR},
-      order_str_id = #{orderStrId,jdbcType=VARCHAR},
-      out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
-      pay_type = #{payType,jdbcType=INTEGER},
-      product_id = #{productId,jdbcType=VARCHAR},
-      sign = #{sign,jdbcType=VARCHAR},
-      sign_type = #{signType,jdbcType=VARCHAR},
-      spbill_create_ip = #{spbillCreateIp,jdbcType=VARCHAR},
-      time_expire = #{timeExpire,jdbcType=VARCHAR},
-      time_start = #{timeStart,jdbcType=VARCHAR},
-      trade_type = #{tradeType,jdbcType=VARCHAR},
-      content_json = #{contentJson,jdbcType=VARCHAR},
-      kd_type = #{kdType,jdbcType=VARCHAR},
-      kd_number = #{kdNumber,jdbcType=VARCHAR},
-      kd_pay_type = #{kdPayType,jdbcType=INTEGER},
-      kd_price = #{kdPrice,jdbcType=INTEGER},
-      pay_status = #{payStatus,jdbcType=INTEGER}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+	<resultMap id="BaseResultMap" type="com.wz.pojo.Order">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="guid" jdbcType="VARCHAR" property="guid" />
+		<result column="body" jdbcType="VARCHAR" property="body" />
+		<result column="body_detail" jdbcType="VARCHAR"
+			property="bodyDetail" />
+		<result column="create_time" jdbcType="TIMESTAMP"
+			property="createTime" />
+		<result column="customer_id" jdbcType="BIGINT"
+			property="customerId" />
+		<result column="customer_name" jdbcType="VARCHAR"
+			property="customerName" />
+		<result column="fee_type" jdbcType="VARCHAR" property="feeType" />
+		<result column="finish_time" jdbcType="TIMESTAMP"
+			property="finishTime" />
+		<result column="mobile" jdbcType="VARCHAR" property="mobile" />
+		<result column="object_id" jdbcType="BIGINT"
+			property="objectId" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="ship_address" jdbcType="VARCHAR"
+			property="shipAddress" />
+		<result column="source_type" jdbcType="INTEGER"
+			property="sourceType" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="target_address" jdbcType="VARCHAR"
+			property="targetAddress" />
+		<result column="total_free" jdbcType="INTEGER"
+			property="totalFree" />
+		<result column="trade_id" jdbcType="VARCHAR" property="tradeId" />
+		<result column="transaction_id" jdbcType="VARCHAR"
+			property="transactionId" />
+		<result column="type" jdbcType="INTEGER" property="type" />
+		<result column="appid" jdbcType="VARCHAR" property="appid" />
+		<result column="detail" jdbcType="VARCHAR" property="detail" />
+		<result column="gmt_create" jdbcType="TIMESTAMP"
+			property="gmtCreate" />
+		<result column="gmt_update" jdbcType="TIMESTAMP"
+			property="gmtUpdate" />
+		<result column="is_delete" jdbcType="INTEGER"
+			property="isDelete" />
+		<result column="mch_id" jdbcType="VARCHAR" property="mchId" />
+		<result column="nonce_str" jdbcType="VARCHAR"
+			property="nonceStr" />
+		<result column="notify_url" jdbcType="VARCHAR"
+			property="notifyUrl" />
+		<result column="openid" jdbcType="VARCHAR" property="openid" />
+		<result column="order_str_id" jdbcType="VARCHAR"
+			property="orderStrId" />
+		<result column="out_trade_no" jdbcType="VARCHAR"
+			property="outTradeNo" />
+		<result column="pay_type" jdbcType="INTEGER" property="payType" />
+		<result column="product_id" jdbcType="VARCHAR"
+			property="productId" />
+		<result column="sign" jdbcType="VARCHAR" property="sign" />
+		<result column="sign_type" jdbcType="VARCHAR"
+			property="signType" />
+		<result column="spbill_create_ip" jdbcType="VARCHAR"
+			property="spbillCreateIp" />
+		<result column="time_expire" jdbcType="VARCHAR"
+			property="timeExpire" />
+		<result column="time_start" jdbcType="VARCHAR"
+			property="timeStart" />
+		<result column="trade_type" jdbcType="VARCHAR"
+			property="tradeType" />
+		<result column="content_json" jdbcType="VARCHAR"
+			property="contentJson" />
+		<result column="kd_type" jdbcType="VARCHAR" property="kdType" />
+		<result column="kd_number" jdbcType="VARCHAR"
+			property="kdNumber" />
+		<result column="kd_pay_type" jdbcType="INTEGER"
+			property="kdPayType" />
+		<result column="kd_price" jdbcType="INTEGER" property="kdPrice" />
+		<result column="pay_status" jdbcType="INTEGER"
+			property="payStatus" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, guid, body, body_detail, create_time, customer_id, customer_name,
+		fee_type, finish_time,
+		mobile, object_id, remark, ship_address, source_type, status, target_address,
+		total_free,
+		trade_id, transaction_id, type, appid, detail, gmt_create, gmt_update,
+		is_delete,
+		mch_id, nonce_str, notify_url, openid, order_str_id, out_trade_no, pay_type,
+		product_id,
+		sign, sign_type, spbill_create_ip, time_expire, time_start, trade_type,
+		content_json,
+		kd_type, kd_number, kd_pay_type, kd_price, pay_status
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from a_order
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from a_order
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.wz.pojo.Order">
+		insert into a_order (id, guid, body,
+		body_detail, create_time, customer_id,
+		customer_name, fee_type, finish_time,
+		mobile, object_id, remark,
+		ship_address, source_type, status,
+		target_address, total_free, trade_id,
+		transaction_id, type, appid,
+		detail, gmt_create, gmt_update,
+		is_delete, mch_id, nonce_str,
+		notify_url, openid, order_str_id,
+		out_trade_no, pay_type, product_id,
+		sign, sign_type, spbill_create_ip,
+		time_expire, time_start, trade_type,
+		content_json, kd_type, kd_number,
+		kd_pay_type, kd_price, pay_status
+		)
+		values (#{id,jdbcType=BIGINT}, #{guid,jdbcType=VARCHAR},
+		#{body,jdbcType=VARCHAR},
+		#{bodyDetail,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{customerId,jdbcType=BIGINT},
+		#{customerName,jdbcType=VARCHAR}, #{feeType,jdbcType=VARCHAR},
+		#{finishTime,jdbcType=TIMESTAMP},
+		#{mobile,jdbcType=VARCHAR}, #{objectId,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR},
+		#{shipAddress,jdbcType=VARCHAR}, #{sourceType,jdbcType=INTEGER},
+		#{status,jdbcType=INTEGER},
+		#{targetAddress,jdbcType=VARCHAR}, #{totalFree,jdbcType=INTEGER}, #{tradeId,jdbcType=VARCHAR},
+		#{transactionId,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
+		#{appid,jdbcType=VARCHAR},
+		#{detail,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtUpdate,jdbcType=TIMESTAMP},
+		#{isDelete,jdbcType=INTEGER}, #{mchId,jdbcType=VARCHAR},
+		#{nonceStr,jdbcType=VARCHAR},
+		#{notifyUrl,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{orderStrId,jdbcType=VARCHAR},
+		#{outTradeNo,jdbcType=VARCHAR}, #{payType,jdbcType=INTEGER},
+		#{productId,jdbcType=VARCHAR},
+		#{sign,jdbcType=VARCHAR}, #{signType,jdbcType=VARCHAR}, #{spbillCreateIp,jdbcType=VARCHAR},
+		#{timeExpire,jdbcType=VARCHAR}, #{timeStart,jdbcType=VARCHAR},
+		#{tradeType,jdbcType=VARCHAR},
+		#{contentJson,jdbcType=VARCHAR}, #{kdType,jdbcType=VARCHAR}, #{kdNumber,jdbcType=VARCHAR},
+		#{kdPayType,jdbcType=INTEGER}, #{kdPrice,jdbcType=INTEGER},
+		#{payStatus,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.wz.pojo.Order">
+		insert into a_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="guid != null">
+				guid,
+			</if>
+			<if test="body != null">
+				body,
+			</if>
+			<if test="bodyDetail != null">
+				body_detail,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="customerId != null">
+				customer_id,
+			</if>
+			<if test="customerName != null">
+				customer_name,
+			</if>
+			<if test="feeType != null">
+				fee_type,
+			</if>
+			<if test="finishTime != null">
+				finish_time,
+			</if>
+			<if test="mobile != null">
+				mobile,
+			</if>
+			<if test="objectId != null">
+				object_id,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="shipAddress != null">
+				ship_address,
+			</if>
+			<if test="sourceType != null">
+				source_type,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="targetAddress != null">
+				target_address,
+			</if>
+			<if test="totalFree != null">
+				total_free,
+			</if>
+			<if test="tradeId != null">
+				trade_id,
+			</if>
+			<if test="transactionId != null">
+				transaction_id,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="appid != null">
+				appid,
+			</if>
+			<if test="detail != null">
+				detail,
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create,
+			</if>
+			<if test="gmtUpdate != null">
+				gmt_update,
+			</if>
+			<if test="isDelete != null">
+				is_delete,
+			</if>
+			<if test="mchId != null">
+				mch_id,
+			</if>
+			<if test="nonceStr != null">
+				nonce_str,
+			</if>
+			<if test="notifyUrl != null">
+				notify_url,
+			</if>
+			<if test="openid != null">
+				openid,
+			</if>
+			<if test="orderStrId != null">
+				order_str_id,
+			</if>
+			<if test="outTradeNo != null">
+				out_trade_no,
+			</if>
+			<if test="payType != null">
+				pay_type,
+			</if>
+			<if test="productId != null">
+				product_id,
+			</if>
+			<if test="sign != null">
+				sign,
+			</if>
+			<if test="signType != null">
+				sign_type,
+			</if>
+			<if test="spbillCreateIp != null">
+				spbill_create_ip,
+			</if>
+			<if test="timeExpire != null">
+				time_expire,
+			</if>
+			<if test="timeStart != null">
+				time_start,
+			</if>
+			<if test="tradeType != null">
+				trade_type,
+			</if>
+			<if test="contentJson != null">
+				content_json,
+			</if>
+			<if test="kdType != null">
+				kd_type,
+			</if>
+			<if test="kdNumber != null">
+				kd_number,
+			</if>
+			<if test="kdPayType != null">
+				kd_pay_type,
+			</if>
+			<if test="kdPrice != null">
+				kd_price,
+			</if>
+			<if test="payStatus != null">
+				pay_status,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="guid != null">
+				#{guid,jdbcType=VARCHAR},
+			</if>
+			<if test="body != null">
+				#{body,jdbcType=VARCHAR},
+			</if>
+			<if test="bodyDetail != null">
+				#{bodyDetail,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="customerId != null">
+				#{customerId,jdbcType=BIGINT},
+			</if>
+			<if test="customerName != null">
+				#{customerName,jdbcType=VARCHAR},
+			</if>
+			<if test="feeType != null">
+				#{feeType,jdbcType=VARCHAR},
+			</if>
+			<if test="finishTime != null">
+				#{finishTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mobile != null">
+				#{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="objectId != null">
+				#{objectId,jdbcType=BIGINT},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="shipAddress != null">
+				#{shipAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="sourceType != null">
+				#{sourceType,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="targetAddress != null">
+				#{targetAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="totalFree != null">
+				#{totalFree,jdbcType=INTEGER},
+			</if>
+			<if test="tradeId != null">
+				#{tradeId,jdbcType=VARCHAR},
+			</if>
+			<if test="transactionId != null">
+				#{transactionId,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="appid != null">
+				#{appid,jdbcType=VARCHAR},
+			</if>
+			<if test="detail != null">
+				#{detail,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtCreate != null">
+				#{gmtCreate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gmtUpdate != null">
+				#{gmtUpdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isDelete != null">
+				#{isDelete,jdbcType=INTEGER},
+			</if>
+			<if test="mchId != null">
+				#{mchId,jdbcType=VARCHAR},
+			</if>
+			<if test="nonceStr != null">
+				#{nonceStr,jdbcType=VARCHAR},
+			</if>
+			<if test="notifyUrl != null">
+				#{notifyUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="openid != null">
+				#{openid,jdbcType=VARCHAR},
+			</if>
+			<if test="orderStrId != null">
+				#{orderStrId,jdbcType=VARCHAR},
+			</if>
+			<if test="outTradeNo != null">
+				#{outTradeNo,jdbcType=VARCHAR},
+			</if>
+			<if test="payType != null">
+				#{payType,jdbcType=INTEGER},
+			</if>
+			<if test="productId != null">
+				#{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="sign != null">
+				#{sign,jdbcType=VARCHAR},
+			</if>
+			<if test="signType != null">
+				#{signType,jdbcType=VARCHAR},
+			</if>
+			<if test="spbillCreateIp != null">
+				#{spbillCreateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="timeExpire != null">
+				#{timeExpire,jdbcType=VARCHAR},
+			</if>
+			<if test="timeStart != null">
+				#{timeStart,jdbcType=VARCHAR},
+			</if>
+			<if test="tradeType != null">
+				#{tradeType,jdbcType=VARCHAR},
+			</if>
+			<if test="contentJson != null">
+				#{contentJson,jdbcType=VARCHAR},
+			</if>
+			<if test="kdType != null">
+				#{kdType,jdbcType=VARCHAR},
+			</if>
+			<if test="kdNumber != null">
+				#{kdNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="kdPayType != null">
+				#{kdPayType,jdbcType=INTEGER},
+			</if>
+			<if test="kdPrice != null">
+				#{kdPrice,jdbcType=INTEGER},
+			</if>
+			<if test="payStatus != null">
+				#{payStatus,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.wz.pojo.Order">
+		update a_order
+		<set>
+			<if test="guid != null">
+				guid = #{guid,jdbcType=VARCHAR},
+			</if>
+			<if test="body != null">
+				body = #{body,jdbcType=VARCHAR},
+			</if>
+			<if test="bodyDetail != null">
+				body_detail = #{bodyDetail,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="customerId != null">
+				customer_id = #{customerId,jdbcType=BIGINT},
+			</if>
+			<if test="customerName != null">
+				customer_name = #{customerName,jdbcType=VARCHAR},
+			</if>
+			<if test="feeType != null">
+				fee_type = #{feeType,jdbcType=VARCHAR},
+			</if>
+			<if test="finishTime != null">
+				finish_time = #{finishTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="objectId != null">
+				object_id = #{objectId,jdbcType=BIGINT},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="shipAddress != null">
+				ship_address = #{shipAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="sourceType != null">
+				source_type = #{sourceType,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="targetAddress != null">
+				target_address = #{targetAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="totalFree != null">
+				total_free = #{totalFree,jdbcType=INTEGER},
+			</if>
+			<if test="tradeId != null">
+				trade_id = #{tradeId,jdbcType=VARCHAR},
+			</if>
+			<if test="transactionId != null">
+				transaction_id = #{transactionId,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="appid != null">
+				appid = #{appid,jdbcType=VARCHAR},
+			</if>
+			<if test="detail != null">
+				detail = #{detail,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gmtUpdate != null">
+				gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isDelete != null">
+				is_delete = #{isDelete,jdbcType=INTEGER},
+			</if>
+			<if test="mchId != null">
+				mch_id = #{mchId,jdbcType=VARCHAR},
+			</if>
+			<if test="nonceStr != null">
+				nonce_str = #{nonceStr,jdbcType=VARCHAR},
+			</if>
+			<if test="notifyUrl != null">
+				notify_url = #{notifyUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="openid != null">
+				openid = #{openid,jdbcType=VARCHAR},
+			</if>
+			<if test="orderStrId != null">
+				order_str_id = #{orderStrId,jdbcType=VARCHAR},
+			</if>
+			<if test="outTradeNo != null">
+				out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+			</if>
+			<if test="payType != null">
+				pay_type = #{payType,jdbcType=INTEGER},
+			</if>
+			<if test="productId != null">
+				product_id = #{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="sign != null">
+				sign = #{sign,jdbcType=VARCHAR},
+			</if>
+			<if test="signType != null">
+				sign_type = #{signType,jdbcType=VARCHAR},
+			</if>
+			<if test="spbillCreateIp != null">
+				spbill_create_ip = #{spbillCreateIp,jdbcType=VARCHAR},
+			</if>
+			<if test="timeExpire != null">
+				time_expire = #{timeExpire,jdbcType=VARCHAR},
+			</if>
+			<if test="timeStart != null">
+				time_start = #{timeStart,jdbcType=VARCHAR},
+			</if>
+			<if test="tradeType != null">
+				trade_type = #{tradeType,jdbcType=VARCHAR},
+			</if>
+			<if test="contentJson != null">
+				content_json = #{contentJson,jdbcType=VARCHAR},
+			</if>
+			<if test="kdType != null">
+				kd_type = #{kdType,jdbcType=VARCHAR},
+			</if>
+			<if test="kdNumber != null">
+				kd_number = #{kdNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="kdPayType != null">
+				kd_pay_type = #{kdPayType,jdbcType=INTEGER},
+			</if>
+			<if test="kdPrice != null">
+				kd_price = #{kdPrice,jdbcType=INTEGER},
+			</if>
+			<if test="payStatus != null">
+				pay_status = #{payStatus,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.wz.pojo.Order">
+		update a_order
+		set guid = #{guid,jdbcType=VARCHAR},
+		body = #{body,jdbcType=VARCHAR},
+		body_detail = #{bodyDetail,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		customer_id = #{customerId,jdbcType=BIGINT},
+		customer_name = #{customerName,jdbcType=VARCHAR},
+		fee_type = #{feeType,jdbcType=VARCHAR},
+		finish_time = #{finishTime,jdbcType=TIMESTAMP},
+		mobile = #{mobile,jdbcType=VARCHAR},
+		object_id = #{objectId,jdbcType=BIGINT},
+		remark = #{remark,jdbcType=VARCHAR},
+		ship_address = #{shipAddress,jdbcType=VARCHAR},
+		source_type = #{sourceType,jdbcType=INTEGER},
+		status = #{status,jdbcType=INTEGER},
+		target_address = #{targetAddress,jdbcType=VARCHAR},
+		total_free = #{totalFree,jdbcType=INTEGER},
+		trade_id = #{tradeId,jdbcType=VARCHAR},
+		transaction_id = #{transactionId,jdbcType=VARCHAR},
+		type = #{type,jdbcType=INTEGER},
+		appid = #{appid,jdbcType=VARCHAR},
+		detail = #{detail,jdbcType=VARCHAR},
+		gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+		gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
+		is_delete = #{isDelete,jdbcType=INTEGER},
+		mch_id = #{mchId,jdbcType=VARCHAR},
+		nonce_str = #{nonceStr,jdbcType=VARCHAR},
+		notify_url = #{notifyUrl,jdbcType=VARCHAR},
+		openid = #{openid,jdbcType=VARCHAR},
+		order_str_id = #{orderStrId,jdbcType=VARCHAR},
+		out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+		pay_type = #{payType,jdbcType=INTEGER},
+		product_id = #{productId,jdbcType=VARCHAR},
+		sign = #{sign,jdbcType=VARCHAR},
+		sign_type = #{signType,jdbcType=VARCHAR},
+		spbill_create_ip = #{spbillCreateIp,jdbcType=VARCHAR},
+		time_expire = #{timeExpire,jdbcType=VARCHAR},
+		time_start = #{timeStart,jdbcType=VARCHAR},
+		trade_type = #{tradeType,jdbcType=VARCHAR},
+		content_json = #{contentJson,jdbcType=VARCHAR},
+		kd_type = #{kdType,jdbcType=VARCHAR},
+		kd_number = #{kdNumber,jdbcType=VARCHAR},
+		kd_pay_type = #{kdPayType,jdbcType=INTEGER},
+		kd_price = #{kdPrice,jdbcType=INTEGER},
+		pay_status = #{payStatus,jdbcType=INTEGER}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
 </mapper>

@@ -9,8 +9,8 @@
 		<result column="gmt_create" jdbcType="TIMESTAMP"
 			property="gmtCreate" />
 	</resultMap>
-	
-	
+
+
 	<sql id="Base_Column_List">
 		id, name, order_no, status, gmt_create
 	</sql>
@@ -21,9 +21,10 @@
 		from a_category
 		where id = #{id,jdbcType=INTEGER}
 	</select>
-	
-	<select id="find" parameterType="com.wz.pojo.Page" resultMap="BaseResultMap">
-	   select
+
+	<select id="find" parameterType="com.wz.pojo.Page"
+		resultMap="BaseResultMap">
+		select
 		<include refid="Base_Column_List" />
 		from a_category
 		limit #{pageIndex}, #{pageItemCount}
@@ -34,9 +35,11 @@
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.wz.pojo.Category">
-		insert into a_category (id, name, order_no,
+		insert into a_category (id,
+		name, order_no,
 		status, gmt_create)
-		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		values (#{id,jdbcType=INTEGER},
+		#{name,jdbcType=VARCHAR},
 		#{orderNo,jdbcType=INTEGER},
 		#{status,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP})
 	</insert>
@@ -102,26 +105,29 @@
 		update a_category
 		set name = #{name,jdbcType=VARCHAR},
 		order_no = #{orderNo,jdbcType=INTEGER},
-		status = #{status,jdbcType=INTEGER},
-		gmt_create = #{gmtCreate,jdbcType=TIMESTAMP}
+		status =
+		#{status,jdbcType=INTEGER},
+		gmt_create =
+		#{gmtCreate,jdbcType=TIMESTAMP}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
 	<!-- 查询所有类目 -->
 	<select id="findAll" resultType="java.util.Map">
 		SELECT
-			id,
-			name
+		id,
+		name
 		FROM a_category
 		WHERE status = 1
 		ORDER BY order_no ASC
 	</select>
 	<!-- 更新状态 -->
 	<update id="updateStatus">
-	update a_category set status = #{status} where id = #{id}
+		update a_category set status = #{status} where id = #{id}
 	</update>
-	
-	<select id="getByName" parameterType="java.lang.String" resultMap="BaseResultMap">
-	 select * from a_category where name = #{name}
+
+	<select id="getByName" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select * from a_category where name = #{name}
 	</select>
 </mapper>

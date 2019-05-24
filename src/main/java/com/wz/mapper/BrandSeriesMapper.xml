@@ -1,123 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wz.dao.BrandSeriesMapper">
-  <resultMap id="BaseResultMap" type="com.wz.pojo.BrandSeries">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="brand_id" jdbcType="INTEGER" property="brandId" />
-    <result column="screen_json" jdbcType="VARCHAR" property="screenJson" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, name, status, gmt_create, brand_id, screen_json
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from a_brand_series
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from a_brand_series
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.wz.pojo.BrandSeries">
-    insert into a_brand_series (id, name, status, 
-      gmt_create, brand_id, screen_json
-      )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{gmtCreate,jdbcType=TIMESTAMP}, #{brandId,jdbcType=INTEGER}, #{screenJson,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.wz.pojo.BrandSeries">
-    insert into a_brand_series
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create,
-      </if>
-      <if test="brandId != null">
-        brand_id,
-      </if>
-      <if test="screenJson != null">
-        screen_json,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="gmtCreate != null">
-        #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="brandId != null">
-        #{brandId,jdbcType=INTEGER},
-      </if>
-      <if test="screenJson != null">
-        #{screenJson,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wz.pojo.BrandSeries">
-    update a_brand_series
-    <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="brandId != null">
-        brand_id = #{brandId,jdbcType=INTEGER},
-      </if>
-      <if test="screenJson != null">
-        screen_json = #{screenJson,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.wz.pojo.BrandSeries">
-    update a_brand_series
-    set name = #{name,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      brand_id = #{brandId,jdbcType=INTEGER},
-      screen_json = #{screenJson,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  
-  <!-- 分页查找 -->
-	<select id="find" parameterType="com.wz.pojo.Page" resultMap="BaseResultMap">
-	   select
+	<resultMap id="BaseResultMap" type="com.wz.pojo.BrandSeries">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="gmt_create" jdbcType="TIMESTAMP"
+			property="gmtCreate" />
+		<result column="brand_id" jdbcType="INTEGER" property="brandId" />
+		<result column="screen_json" jdbcType="VARCHAR"
+			property="screenJson" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name, status, gmt_create, brand_id, screen_json
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from a_brand_series
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from a_brand_series
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.wz.pojo.BrandSeries">
+		insert into a_brand_series (id, name, status,
+		gmt_create, brand_id, screen_json
+		)
+		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER},
+		#{gmtCreate,jdbcType=TIMESTAMP}, #{brandId,jdbcType=INTEGER}, #{screenJson,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.wz.pojo.BrandSeries">
+		insert into a_brand_series
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create,
+			</if>
+			<if test="brandId != null">
+				brand_id,
+			</if>
+			<if test="screenJson != null">
+				screen_json,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="gmtCreate != null">
+				#{gmtCreate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="brandId != null">
+				#{brandId,jdbcType=INTEGER},
+			</if>
+			<if test="screenJson != null">
+				#{screenJson,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.wz.pojo.BrandSeries">
+		update a_brand_series
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="brandId != null">
+				brand_id = #{brandId,jdbcType=INTEGER},
+			</if>
+			<if test="screenJson != null">
+				screen_json = #{screenJson,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.wz.pojo.BrandSeries">
+		update a_brand_series
+		set name = #{name,jdbcType=VARCHAR},
+		status = #{status,jdbcType=INTEGER},
+		gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+		brand_id = #{brandId,jdbcType=INTEGER},
+		screen_json = #{screenJson,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- 分页查找 -->
+	<select id="find" parameterType="com.wz.pojo.Page"
+		resultMap="BaseResultMap">
+		select
 		<include refid="Base_Column_List" />
 		from a_brand_series
 		limit #{pageIndex}, #{pageItemCount}
 	</select>
-	
+
 	<!-- 更新状态 -->
 	<update id="updateStatus">
-	update a_brand_series set status = #{status} where id = #{id}
+		update a_brand_series set status = #{status} where id = #{id}
 	</update>
-	
-	<select id="getByName" parameterType="java.lang.String" resultMap="BaseResultMap">
-	 select * from a_brand_series where name = #{name}
+
+	<select id="getByName" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select * from a_brand_series where name = #{name}
 	</select>
 </mapper>

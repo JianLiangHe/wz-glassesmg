@@ -1,0 +1,80 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>约见管理系统</title>
+<link href="./css/login.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="./js/jquery-1.8.0.min.js"></script>
+
+</head>
+<body>
+
+	<div class="login">
+		<div class="message">五洲-管理登录</div>
+		<div id="darkbannerwrap"></div>
+
+		<form method="post" id="form1">
+
+			<input id="userName" name="userName" placeholder="用户名"
+				required="true" type="text">
+			<hr class="hr15">
+			<input id="password" name="password" placeholder="密码" required="true"
+				type="password">
+			<hr class="hr15">
+			<hr class="hr20">
+			<!-- 帮助 <a onClick="alert('请联系管理员')">忘记密码</a> -->
+		</form>
+		<input value="登录" style="width: 100%;" type="button" id="btn1">
+
+	</div>
+
+	<div class="copyright">© 2019 五洲智造(广东)科技有限公司</div>
+
+</body>
+</html>
+
+<script>
+	$("#btn1").click(
+			function() {
+				if ($("#userName").val().length == 0) {
+					$("#userName").css("border-color", 'red');
+					return false;
+				}
+				if ($("#password").val().length == 0) {
+					$("#password").css("border-color", 'red');
+					return false;
+				}
+				login();
+			});
+	$("input").focus(function() {
+		$(this).css("border-color", "#27A9E3");
+	});
+
+	function login() {
+		var userName = $("#userName").val();
+		var password = $("#password").val();
+		
+		$.ajax({
+			type : "POST",
+			url : "/wz-glassesmg/api/login/loginByUser",
+			data : {"userName":userName, "password":password},
+			success : function(data) {
+				if (data.code == 0) {
+					location.href = '/wz-glassesmg/api/login/toMain';
+				} else {
+					alert(data.message);
+				}
+			}
+		});
+	}
+
+	document.onkeydown = function(event) {
+		var e = event || window.event || arguments.callee.caller.arguments[0];
+		if (e && e.keyCode == 13) { // enter 键
+			login();
+		}
+	};
+</script>
+</html>
