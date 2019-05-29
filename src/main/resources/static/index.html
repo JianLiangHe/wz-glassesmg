@@ -4,7 +4,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>约见管理系统</title>
+<title>五洲管理系统</title>
 <link href="./css/login.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" src="./js/jquery-1.8.0.min.js"></script>
 
@@ -62,7 +62,7 @@
 			data : {"userName":userName, "password":password},
 			success : function(data) {
 				if (data.code == 0) {
-					location.href = '/wz-glassesmg/api/login/toMain';
+					location.href = '/wz-glassesmg/main/toMain.do';
 				} else {
 					alert(data.message);
 				}

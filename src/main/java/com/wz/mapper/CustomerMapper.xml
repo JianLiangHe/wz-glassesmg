@@ -312,7 +312,7 @@
 				AND shop_name LIKE CONCAT(CONCAT('%', #{shopName}), '%')
 			</if>
 		</where>
-		ORDER BY gmt_create DESC LIMIT #{page.start}, #{page.pageItemCount}
+		ORDER BY gmt_create DESC LIMIT #{page.start}, #{page.end}
 	</select>
 
 	<!-- 更新用户状态 -->
@@ -343,11 +343,20 @@
 
 	<!-- 查询用户所购买的商品 -->
 	<select id="getProduceList" resultMap="ProductListMap">
-
-		SELECT ac.*,ao.*,ap.name as 'productName',ap.pic_url as 'picUrl'
+		SELECT 
+			ac.*,
+			ao.*,
+			ap.name as 'productName',
+			ap.pic_url as 'picUrl'
 		FROM a_customer ac, a_order ao, a_product ap
 		WHERE ac.id = ao.customer_id
 		AND ao.product_id = ap.id;
 	</select>
 
+	<!-- 获取数据条数 -->
+	<select id="getCount" resultType="java.lang.Integer">
+		SELECT
+			COUNT(*)
+		FROM a_customer
+	</select>
 </mapper>

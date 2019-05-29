@@ -1,20 +1,19 @@
 package com.wz.service.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.wz.dao.CustomerMapper;
 import com.wz.dto.FindCustomerDto;
-import com.wz.dto.FindUserDto;
 import com.wz.pojo.Customer;
-import com.wz.pojo.User;
 import com.wz.service.CustomerService;
 import com.wz.util.RtnResult;
 import com.wz.util.WebUtils;
 import com.wz.util.enums.CustomerEnum;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration;
-import org.springframework.stereotype.Service;
 
 @Service("customerService")
 public class CustomerServiceImpl implements CustomerService {
@@ -26,28 +25,39 @@ public class CustomerServiceImpl implements CustomerService {
 	public RtnResult get(Integer id) {
 		Customer customer = customerMapper.selectByPrimaryKey(id);
 		return new RtnResult(WebUtils.SUCCESS_RESULT, WebUtils.SUCCESS_STATUS, WebUtils.SUCCESS_MESSAGE, customer);
-
 	}
 
 	@Override
-	public RtnResult find(FindCustomerDto dto) {
+	public Map<String, Object> find(FindCustomerDto dto) {
 		Integer isDelete = CustomerEnum.IsDelete.否.getValue();
 		dto.setIsDelete(isDelete);
 
+		// 1, 查询数据
 		List<Customer> result = customerMapper.find(dto);
-		return new RtnResult(WebUtils.SUCCESS_RESULT, WebUtils.SUCCESS_STATUS, WebUtils.SUCCESS_MESSAGE, result);
+		
+		int totalSize = customerMapper.getCount(dto);
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>(){{
+			put("rows", result);
+			put("total", totalSize);
+			put("status","200");
+			put("msg","success");
+		}};
+		
+		return resultMap;
 	}
 
 	@Override
 	public RtnResult updateStatus(Integer id, Integer status) {
-
 		Customer customer = customerMapper.selectByPrimaryKey(id);
+		
 		if (customer == null) {
 			return new RtnResult(WebUtils.ERROR_RESULT, WebUtils.ERROR_STATUS, "该用户不存在！");
 		}
 
 		try {
 			customerMapper.updateStatus(id, status);
+			
 			return new RtnResult(WebUtils.SUCCESS_RESULT, WebUtils.SUCCESS_STATUS, WebUtils.SUCCESS_MESSAGE);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,18 +67,17 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public RtnResult regist(Customer customer) {
-		
 		String password = customer.getPassword();
 		
-		
 		customerMapper.insertSelective(customer);
+		
 		return new RtnResult(WebUtils.SUCCESS_RESULT, WebUtils.SUCCESS_STATUS, WebUtils.SUCCESS_MESSAGE);
 	}
 
 	@Override
 	public RtnResult registApprove(Integer id, Integer approveStatus) {
-
 		Customer customer = customerMapper.selectByPrimaryKey(id);
+		
 		if (customer == null) {
 			return new RtnResult(WebUtils.ERROR_RESULT, WebUtils.ERROR_STATUS, "该用户不存在！");
 		}
@@ -84,13 +93,12 @@ public class CustomerServiceImpl implements CustomerService {
 			e.printStackTrace();
 			return new RtnResult(WebUtils.ERROR_RESULT, WebUtils.ERROR_STATUS, "审批失败！");
 		}
-
 	}
 
 	@Override
 	public RtnResult getProductList() {
-	
-	List<Customer>	produceList = customerMapper.getProduceList();
-	return new RtnResult(WebUtils.SUCCESS_RESULT, WebUtils.SUCCESS_STATUS, WebUtils.SUCCESS_MESSAGE, produceList);
+		List<Customer>	produceList = customerMapper.getProduceList();
+		
+		return new RtnResult(WebUtils.SUCCESS_RESULT, WebUtils.SUCCESS_STATUS, WebUtils.SUCCESS_MESSAGE, produceList);
 	}
 }

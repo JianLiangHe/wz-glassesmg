@@ -1,7 +1,8 @@
 package com.wz.service;
 
+import java.util.Map;
+
 import com.wz.dto.FindCustomerDto;
-import com.wz.dto.FindUserDto;
 import com.wz.pojo.Customer;
 import com.wz.util.RtnResult;
 
@@ -9,7 +10,7 @@ public interface CustomerService {
 
 	RtnResult get(Integer id);
 
-	RtnResult find(FindCustomerDto dto);
+	Map<String, Object> find(FindCustomerDto dto);
 
 	RtnResult updateStatus(Integer id, Integer status);
 	

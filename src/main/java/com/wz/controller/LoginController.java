@@ -1,5 +1,7 @@
 package com.wz.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,10 +28,11 @@ public class LoginController {
 	@ApiOperation(value = "管理员登陆")
 	@RequestMapping(value = "loginByUser", method = RequestMethod.POST)
 	public RtnResult loginByUser(
+			HttpServletRequest request,
 			@ApiParam(value = "用户名", required = true) @RequestParam(value = "userName", required = true) String userName,
 			@ApiParam(value = "密码", required = true) @RequestParam(value = "password", required = true) String password
 	) {
-		return loginService.loginByUser(userName, password);
+		return loginService.loginByUser(request, userName, password);
 	}
 	
 }

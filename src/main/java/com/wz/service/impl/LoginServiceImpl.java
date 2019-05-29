@@ -1,22 +1,23 @@
 package com.wz.service.impl;
 
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wz.dao.RoleMapper;
 import com.wz.dao.UserMapper;
+import com.wz.pojo.Role;
 import com.wz.pojo.User;
 import com.wz.service.LoginService;
-import com.wz.util.CookieUtil;
-import com.wz.util.DateUtil;
 import com.wz.util.MD5Util;
 import com.wz.util.RtnResult;
-import com.wz.util.TokenUtil;
 import com.wz.util.WebUtils;
 
 @Service("loginService")
@@ -25,10 +26,13 @@ public class LoginServiceImpl implements LoginService {
 	private static final Logger LOGGER = Logger.getLogger(LoginServiceImpl.class);
 
 	@Autowired
+	private RoleMapper roleMapper;
+	
+	@Autowired
 	private UserMapper userMapper;
 
 	@Override
-	public RtnResult loginByUser(String username, String password) {
+	public RtnResult loginByUser(HttpServletRequest request, String username, String password) {
 		// 1, 判断用户名是否存在
 		User dbUser = userMapper.getByName(username);
 
@@ -49,16 +53,20 @@ public class LoginServiceImpl implements LoginService {
 		}
 
 		try {
-			Map<String, Object> data = new HashMap<String, Object>();
-			data.put("id", dbUser.getId());
+			HttpSession session = request.getSession();
 			
-			Long timestamp = DateUtil.getBeforeOrAfterTimestamp(new Date(), 7);
-			data.put("timestamp", timestamp);
+			Map<String, Object> loginUser = new HashMap<String, Object>();
 			
-			String token = TokenUtil.encryptToken(data);
-			CookieUtil.saveCookieByToken(token);
+			Integer roleId = dbUser.getRoleId();
 			
-			return new RtnResult(WebUtils.SUCCESS_RESULT, WebUtils.SUCCESS_STATUS, WebUtils.SUCCESS_MESSAGE, token);
+			Role role = roleMapper.selectByPrimaryKey(roleId);
+			
+			loginUser.put("user", dbUser);
+			loginUser.put("role", role);
+			
+			session.setAttribute("loginUser", loginUser);
+			
+			return new RtnResult(WebUtils.SUCCESS_RESULT, WebUtils.SUCCESS_STATUS, WebUtils.SUCCESS_MESSAGE);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new RtnResult(WebUtils.ERROR_RESULT, WebUtils.ERROR_STATUS, "登录失败！");

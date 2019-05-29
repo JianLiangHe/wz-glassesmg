@@ -1,5 +1,7 @@
 package com.wz.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.wz.util.RtnResult;
 
 /**
@@ -11,10 +13,11 @@ public interface LoginService {
 
 	/**
 	 * 管理员登陆
+	 * @param request
 	 * @param userName
 	 * @param password
 	 * @return
 	 */
-	RtnResult loginByUser(String userName, String password);
+	RtnResult loginByUser(HttpServletRequest request, String userName, String password);
 	
 }

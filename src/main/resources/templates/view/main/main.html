@@ -22,7 +22,7 @@
 				<li class="layui-nav-item" style="widht: 600px;">
 					<!-- 代理用户 --> <!-- 省继承人用户 --> <a href="javascript:;"> <img
 						src="http://yuejian-app.oss-cn-shenzhen.aliyuncs.com/photoalbum/7113471515851321757.jpg"
-						class="layui-nav-img"> &nbsp;&nbsp;<span th:text="${session.loginUser.username}"></span>
+						class="layui-nav-img"> &nbsp;&nbsp;<span th:text="${session.loginUser.user.username}"></span>
 				</a>
 
 					<dl class="layui-nav-child">
@@ -38,28 +38,36 @@
 		<div class="layui-side layui-bg-cyan">
 			<div class="layui-side-scroll">
 				<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-				<ul class="layui-nav layui-nav-tree" lay-filter="test">
+				<ul class="layui-nav layui-nav-tree" lay-filter="test" th:if="${session.loginUser.role.powerJson.contains('基础管理')}">
 					<li class="layui-nav-item"><a class=""
 						href="javascript:;">基础管理</a>
 						<dl class="layui-nav-child">
-							<dd>
+							<dd th:if="${session.loginUser.role.powerJson.contains('用户管理')}">
 								<a
-									href="javascript:openTab('/wz-glassesmg/api/customer/toCustomer','用户列表');;">用户列表</a>
-							</dd>
-							<dd>
-								<a
-									href="javascript:openTab('/wz-glassesmg/api/customer/toCustomer','用户列表');;">用户列表2</a>
+									href="javascript:openTab('/wz-glassesmg/api/customer/toCustomer.do','用户管理');;">用户管理</a>
 							</dd>
 						</dl>
 					</li>
 				</ul>
 				<ul class="layui-nav layui-nav-tree" lay-filter="test">
 					<li class="layui-nav-item"><a class=""
-						href="javascript:;">基础管理2</a>
+						href="javascript:;">商品管理</a>
 						<dl class="layui-nav-child">
 							<dd>
 								<a
-									href="javascript:openTab('/wz-glassesmg/api/customer/toCustomer','用户列表');;">用户列表2</a>
+									href="javascript:openTab('/wz-glassesmg/api/customer/toCustomer','类目管理');;">类目管理</a>
+							</dd>
+							<dd>
+								<a
+									href="javascript:openTab('/wz-glassesmg/api/customer/toCustomer','品牌类型管理');;">品牌类型管理</a>
+							</dd>
+							<dd>
+								<a
+									href="javascript:openTab('/wz-glassesmg/api/customer/toCustomer','品牌管理');;">品牌管理</a>
+							</dd>
+							<dd>
+								<a
+									href="javascript:openTab('/wz-glassesmg/api/customer/toCustomer','商品管理');;">商品管理</a>
 							</dd>
 						</dl>
 					</li>
@@ -76,37 +84,7 @@
 				</ul>
 
 				<div class="layui-tab-content">
-					<div class="layui-tab-item layui-show">
-						<div class="layui-row">
-							<div class="layui-col-xs3">
-								<div class="grid" style="font-size: 18px; font-family: '微软雅黑';">
-									<div class="data_block platform_gold">
-										<div class='title'>您的金币数</div>
-										<div class='icon'>
-											<img src='/yuejian-agent/imgs/coins.png' width="50px">
-										</div>
-										<div class='content'></div>
-										<div style="clear: both;"></div>
-									</div>
-								</div>
-							</div>
-							<div class="layui-col-xs3">
-								<div class="grid" style="font-size: 18px; font-family: '微软雅黑';">
-
-								</div>
-							</div>
-							<div class="layui-col-xs3">
-								<div class="grid" style="font-size: 18px; font-family: '微软雅黑';">
-
-								</div>
-							</div>
-							<div class="layui-col-xs3">
-								<div class="grid" style="font-size: 18px; font-family: '微软雅黑';">
-
-								</div>
-							</div>
-						</div>
-					</div>
+					
 				</div>
 			</div>
 

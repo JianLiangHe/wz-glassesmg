@@ -1,6 +1,6 @@
 package com.wz.dto;
 
-import com.wz.pojo.Page;
+import com.wz.util.PageQueryUtil;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,8 +25,6 @@ public class FindCustomerDto {
 	
 	private Integer isDelete;
 	
-	private Page page;
+	private PageQueryUtil page;
 	
-	
-
 }

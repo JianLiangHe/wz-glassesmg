@@ -17,5 +17,9 @@ public interface RoleMapper {
 
     int updateByPrimaryKey(Role record);
     
-    List <Role> find();
+    /**
+     * 查询
+     * @return
+     */
+    List<Role> find();
 }

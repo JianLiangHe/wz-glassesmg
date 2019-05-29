@@ -1,0 +1,321 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" th:href="@{/static/layui/css/layui.css}">
+<script type="text/javascript"
+	th:src="@{/static/js/jquery-1.8.0.min.js}"></script>
+<script th:src="@{/static/layui/layui.js}"></script>
+<script type="text/javascript">
+	var ctx = '/wz-glassesmg';
+</script>
+
+<style>
+.sum {
+	float: right;
+	margin: 3px 30px;
+	font-size: 16px;
+}
+
+.layui-table td {
+	height: 80px;
+}
+</style>
+</head>
+<body>
+	<div class="layui-form layui-card-header layuiadmin-card-header-auto">
+		<form id="queryForm" action="#">
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label">店铺名称</label>
+					<div class="layui-input-inline">
+						<input id="shopName" type="text" name="shopName" placeholder="请输入"
+							autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">手机号码</label>
+					<div class="layui-input-inline">
+						<input id="mobile" type="text" name="mobile" placeholder="请输入"
+							autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">状态</label>
+					<div class="layui-input-inline">
+						<select id="v_status" name="status">
+							<option value="">请选择</option>
+							<option value="0">正常</option>
+							<option value="1">禁用</option>
+						</select>
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">审核状态</label>
+					<div class="layui-input-inline">
+						<select id="v_approveStatus" name="approveStatus">
+							<option value="">请选择</option>
+							<option value="0">未审核</option>
+							<option value="1">审核通过</option>
+							<option value="2">审核不通过</option>
+						</select>
+					</div>
+				</div>
+				<div class="layui-inline">
+					<button class="layui-btn layuiadmin-btn-list" lay-submit
+						lay-filter="LAY-app-contlist-search"
+						onclick="reload();return false;">
+						<i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- <div>店铺名称:</div>
+	<div class="layui-btn-group demoTable"
+		style="float: right; background: rgb(0, 150, 136); margin-left: 5px;"
+		onclick="btnClick();">
+		<button data-method="offset" data-type="auto" class="layui-btn">
+			<i class="layui-icon">&#xe654;</i>审核
+		</button>
+	</div>
+
+	<div class="layui-btn-group demoTable"
+		style="float: right; background: rgb(0, 150, 136);"
+		onclick="btnClick();">
+		<button data-method="offset" data-type="auto" class="layui-btn">
+			<i class="layui-icon">&#xe654;</i>修改状态
+		</button>
+	</div> -->
+	<table id="tableData" class="layui-table" lay-filter="tableData">
+	</table>
+
+	<!-- 弹出框页面 -->
+	<div id="openWindow" modal="true" shadow="true" minimizable="false"
+		cache="false" maximizable="true" collapsible="true" resizable="true"
+		style="margin: 0px; padding: 0px; overflow: hidden"></div>
+</body>
+</html>
+
+<script type="text/html" id="toolbarDemo">
+  <div class="layui-btn-container">
+    <!--
+	<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+    <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+    <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+	-->
+  </div>
+</script>
+
+<script type="text/html" id="status">
+	{{#  if(d.status == 0){ }}
+              <span style="color: green;">正常</span>
+	{{#   } }}
+	{{#  if(d.status == 1){ }}
+             <span style="color: red;">禁用</span>
+	{{#   } }}
+</script>
+
+<script type="text/html" id="approveStatus">
+	{{#  if(d.approveStatus == 0){ }}
+              未审核
+	{{#   } }}
+	{{#  if(d.approveStatus == 1){ }}
+             <span style="color: green;">审核通过</span>
+	{{#   } }}
+	{{#  if(d.approveStatus == 2){ }}
+             <span style="color: red;"> 审核不通过</span>
+	{{#   } }}
+</script>
+
+<script type="text/html" id="operation">
+	{{#	if(d.approveStatus == 0) { }}
+		<button onclick="approve({{d.id}}, 1);" style="height: 24px; line-height: 24px;" class="layui-btn layui-btn-sm layui-btn-danger">审核通过</button>
+		<button onclick="approve({{d.id}}, 2);" style="height: 24px; line-height: 24px;" class="layui-btn layui-btn-sm layui-btn-danger">审核不通过</button>
+	{{#	} }}
+	{{#	if(d.status == 0) { }}
+		<button onclick="" style="height: 24px; line-height: 24px;" class="layui-btn layui-btn-sm layui-btn-danger">禁用</button>
+	{{#	} }}
+	{{#	if(d.status == 1) { }}
+		<button onclick="" style="height: 24px; line-height: 24px;" class="layui-btn layui-btn-sm layui-btn-danger">启用</button>
+	{{#	} }}
+</script>
+
+<script type="text/javascript">
+	var table;
+	jQuery(function($) {
+		var autoWidth = document.body.clientWidth * 0.97;
+		layui.use('table', function() {
+			table = layui.table;
+			//展示已知数据
+			table.render({
+				elem : '#tableData',
+				id : 'tableData',
+				where : [],
+				url : ctx + "/api/customer/find?x=" + Math.random(),
+				method : "GET",
+				height : 'full-80',
+				toolbar : '#toolbarDemo',
+				cols : [ [ {
+					hide : true,
+					field : 'id',
+					toolbar : "#barDemo"
+				}, /* {
+														type : 'checkbox',
+														title : '',
+														align : 'center',
+														fixed : 'left',
+														height : 60
+													}, */{
+					field : 'shopName',
+					title : '店铺名称',
+					width : 200,
+					align : 'center'
+				}, {
+					field : 'province',
+					title : '省份',
+					align : 'center',
+					width : 100,
+					align : 'center'
+				}, {
+					field : 'city',
+					title : '城市',
+					align : 'center',
+					width : 100,
+					align : 'center'
+				}, {
+					field : 'area',
+					title : '地区',
+					align : 'center',
+					width : 100,
+				}, {
+					field : 'address',
+					title : '详细地址',
+					align : 'center',
+					width : 200,
+				}, {
+					field : 'linkman',
+					title : '联系人',
+					align : 'center',
+					width : 100,
+				}, {
+					field : 'idcardUrl',
+					title : '身份证',
+					align : 'center',
+					width : 220,
+				}, {
+					field : 'businessUrl',
+					title : '营业执照',
+					align : 'center',
+					width : 220,
+				}, {
+					field : 'mobile',
+					title : '手机号码',
+					align : 'center',
+					width : 120,
+				}, {
+					field : 'status',
+					title : '状态',
+					align : 'center',
+					width : 100,
+					templet : "#status"
+				}, {
+					field : 'approveStatus',
+					title : '审批状态',
+					align : 'center',
+					width : 100,
+					templet : "#approveStatus"
+				}, {
+					field : 'gmtCreate',
+					title : '创建时间',
+					align : 'center',
+					width : 180,
+				}, {
+					title : '操作',
+					align : 'center',
+					width : 300,
+					templet : '#operation'
+				} ] ],
+				skin : 'row' //表格风格
+				,
+				loading : true,
+				even : true,
+				page : true //是否显示分页
+				,
+				limits : [ 5, 10, 15 ],
+				limit : 10//每页默认显示的数量
+				,
+				request : {
+					pageName : 'page' //页码的参数名称，默认：page
+					,
+					limitName : 'rows' //每页数据量的参数名，默认：limit
+				},
+				response : {
+					statusName : 'status' //数据状态的字段名称，默认：code
+					,
+					statusCode : 200 //成功的状态码，默认：0
+					,
+					msgName : 'msg' //状态信息的字段名称，默认：msg
+					,
+					countName : 'total' //数据总数的字段名称，默认：count
+					,
+					dataName : 'rows' //数据列表的字段名称，默认：data
+				},
+				done : function(res) {
+					console.log(res);
+				}
+			});
+
+		});
+	});
+
+	function reload() {
+		var query = JSON.stringify($('#queryForm').serializeArray());
+		console.log(query);
+		table.reload('tableData', {
+			url : ctx + "/api/customer/find?x=" + Math.random(),
+			where : {
+				shopName : $('#shopName').val(),
+				mobile : $('#mobile').val(),
+				status : $("#v_status").val(),
+				approveStatus : $("#v_approveStatus").val()
+			}
+		//设定异步数据接口的额外参数
+		});
+	}
+
+	function approve(id, approveStatus) {
+		var c = (status == 1) ? '你要审核通过吗?' : '你确定要审核不通过吗?';
+
+		layer.open({
+			title : '审核用户',
+			content : c,
+			btn : [ '确定' ],
+			btn1 : function(index, layero) {
+				$.ajax({
+					type : 'POST',
+					url : ctx + '/api/customer/registApprove',
+					data : {
+						'id' : id,
+						'approveStatus' : approveStatus
+					},
+					success : function() {
+						layer.closeAll(); //再执行关闭
+						table.reload('tableData', {
+							where : {}
+						});
+					}
+				});
+
+				/* $.get(url, null, function(data) {
+					//刷新页面
+					layer.closeAll(); //再执行关闭
+					table.reload('tableData', {
+						where : {}
+					});
+				}); */
+			}
+		});
+	}
+</script>
